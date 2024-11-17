@@ -2,6 +2,8 @@ from django.shortcuts import render
 from .models import Book
 from .models import Library
 from django.views.generic.detail import DetailView
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import login
 
 # Create your views here.
 def list_books(request):
@@ -14,9 +16,6 @@ class LibraryDetailView(DetailView):
     template_name = "relationship_app/library_detail.html"
     context_name = 'library'
 
-    from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
 
 def register(request):
     if request.method == 'POST':
