@@ -8,6 +8,10 @@ from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import permission_required
 from .models import Book
+from django.contrib.auth.decorators import permission_required
+from django.shortcuts import render, get_object_or_404
+from .models import Book
+
 
 # Create your views here.
 def list_books(request):
@@ -91,3 +95,14 @@ def delete_book(request, book_id):
         return redirect('book_list')
 
     return render(request, 'relationship_app/delete_book.html', {'book': book})
+
+@permission_required('relationship_app.can_add_book')
+def add_book(request):
+    # Logic for adding a book
+    return render(request, 'relationship_app/add_book.html')
+
+@permission_required('relationship_app.can_change_book')
+def edit_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    # Logic for editing a book
+    return render(request, 'relationship_app/edit_book.html', {'book': book})
