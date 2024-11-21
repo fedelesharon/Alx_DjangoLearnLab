@@ -151,3 +151,16 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 # For media files (uploads like profile photos)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+DEBUG = False
+
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'  # Prevents your site from being embedded in an iframe
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevents browsers from trying to guess content types
+
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookie is sent only over HTTPS
+SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent only over HTTPS
+
+SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
+
+
