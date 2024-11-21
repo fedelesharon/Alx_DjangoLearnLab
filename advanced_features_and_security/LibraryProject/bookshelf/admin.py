@@ -4,6 +4,9 @@ from django.contrib import admin
 from .models import Book
 from django.contrib.auth.admin import UserAdmin
 from .models import CustomUser
+from django.contrib.auth.models import Group, Permission
+from .models import Book
+
 
 # Register your models here.
 # admin.site.register(Book)
@@ -30,4 +33,26 @@ class CustomUserAdmin(UserAdmin):
         (None, {'classes': ('wide',), 'fields': ('username', 'email', 'password1', 'password2')}),
     )
 
-admin.site.register(CustomUser, CustomUserAdmin)    
+admin.site.register(CustomUser, CustomUserAdmin)   
+
+# Register the Book model
+admin.site.register(Book)
+
+# Adding groups and permissions via Django Admin
+def create_groups_and_permissions():
+    # Create groups
+    viewer_group, created = Group.objects.get_or_create(name='Viewers')
+    editor_group, created = Group.objects.get_or_create(name='Editors')
+    admin_group, created = Group.objects.get_or_create(name='Admins')
+
+    # Assign permissions to groups
+    can_view = Permission.objects.get(codename='can_view')
+    can_create = Permission.objects.get(codename='can_create')
+    can_edit = Permission.objects.get(codename='can_edit')
+    can_delete = Permission.objects.get(codename='can_delete')
+
+    viewer_group.permissions.set([can_view])
+    editor_group.permissions.set([can_view, can_create, can_edit])
+    admin_group.permissions.set([can_view, can_create, can_edit, can_delete])
+
+# Call this function manually or from a Django management command
