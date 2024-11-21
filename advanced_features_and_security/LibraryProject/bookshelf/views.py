@@ -4,6 +4,9 @@ from django.contrib.auth.decorators import permission_required
 from .models import Book
 from django.shortcuts import render
 from .forms import ExampleForm
+from django.shortcuts import render
+from .models import Book
+
 
 # Create your views here.
 # View to create a book
@@ -64,3 +67,7 @@ def example_view(request):
         form = ExampleForm()
 
     return render(request, 'bookshelf/form_example.html', {'form': form})
+
+def book_list(request):
+    books = Book.objects.all()  # Retrieve all books from the database
+    return render(request, 'bookshelf/book_list.html', {'books': books})
