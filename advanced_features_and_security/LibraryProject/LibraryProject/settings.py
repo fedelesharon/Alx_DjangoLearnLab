@@ -163,4 +163,30 @@ SESSION_COOKIE_SECURE = True  # Ensure session cookie is sent only over HTTPS
 
 SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS
 
+# settings.py
+SECURE_SSL_REDIRECT = True
+
+# settings.py
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+
+# settings.py
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+# settings.py
+SECURE_HSTS_PRELOAD = True
+
+# settings.py
+SESSION_COOKIE_SECURE = True
+
+# settings.py
+CSRF_COOKIE_SECURE = True
+
+# settings.py
+X_FRAME_OPTIONS = 'DENY'
+
+# settings.py
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# settings.py
+SECURE_BROWSER_XSS_FILTER = True
 
