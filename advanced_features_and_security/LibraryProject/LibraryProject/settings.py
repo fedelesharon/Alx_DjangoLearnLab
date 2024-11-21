@@ -146,3 +146,8 @@ TEMPLATES = [
     },
 ]
 AUTH_USER_MODEL = 'user_app.CustomUser'
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
+
+# For media files (uploads like profile photos)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

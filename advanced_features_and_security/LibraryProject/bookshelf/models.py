@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Book(models.Model):
@@ -23,3 +24,11 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+    
+class CustomUser(AbstractUser):
+    # Add additional fields to the CustomUser model
+    date_of_birth = models.DateField(null=True, blank=True)
+    profile_photo = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
+
+    def __str__(self):
+        return self.username    
