@@ -6,6 +6,7 @@ from .models import Book
 from .serializers import BookSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 class BookListView(generics.ListAPIView):
     queryset = Book.objects.all()
