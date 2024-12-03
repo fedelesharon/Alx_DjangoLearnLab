@@ -1,0 +1,16 @@
+<h2>Profile</h2>
+<form method="post">
+    {% csrf_token %}
+    <label for="email">Email:</label>
+    <input type="email" name="email" value="{{ user.email }}">
+    <button type="submit">Update</button>
+</form>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="bio">Bio:</label>
+    <textarea name="bio">{{ user.userprofile.bio }}</textarea>
+    <label for="profile_picture">Profile Picture:</label>
+    <input type="file" name="profile_picture">
+    <button type="submit">Update</button>
+</form>
