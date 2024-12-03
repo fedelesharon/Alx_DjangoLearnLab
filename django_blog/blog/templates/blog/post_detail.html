@@ -5,3 +5,24 @@
     <a href="{{ post.get_absolute_url }}/edit/">Edit</a>
     <a href="{{ post.get_absolute_url }}/delete/">Delete</a>
 {% endif %}
+<h2>Comments</h2>
+{% for comment in comments %}
+    <div>
+        <p>{{ comment.content }}</p>
+        <small>by {{ comment.author }} on {{ comment.created_at }}</small>
+        {% if comment.author == user %}
+            <a href="{% url 'comment-edit' comment.pk %}">Edit</a>
+            <a href="{% url 'comment-delete' comment.pk %}">Delete</a>
+        {% endif %}
+    </div>
+{% endfor %}
+<h3>Add a Comment</h3>
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'login' %}">log in</a> to comment.</p>
+{% endif %}
