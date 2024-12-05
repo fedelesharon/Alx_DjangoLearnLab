@@ -19,6 +19,9 @@ from django.views.generic import DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Post, Comment
 from .forms import CommentForm
+from django.db.models import Q
+from django.views.generic import ListView
+from taggit.models import Tag
 
 
 def register(request):
@@ -145,4 +148,25 @@ class PostDetailView(DetailView):
             comment.post = self.object
             comment.save()
             return redirect('post-detail', pk=self.object.pk)
-        return self.get(request, *args, **kwargs)    
+        return self.get(request, *args, **kwargs)  
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
+class PostSearchView(ListView):
+    model = Post
+    template_name = 'blog/post_search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        return Post.objects.filter(
+            Q(title__icontains=query) | 
+            Q(content__icontains=query) | 
+            Q(tags__name__icontains=query)
+        ).distinct()
+
+class PostsByTagView(ListView):
+    model = Post
+    template_name = 'blog/posts_by_tag.html'
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs['slug'])          

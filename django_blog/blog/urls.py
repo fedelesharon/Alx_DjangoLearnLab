@@ -4,6 +4,8 @@ from . import views
 from django.contrib.auth import views as auth_views
 from .views import PostListView, PostDetailView, PostCreateView, PostUpdateView, PostDeleteView
 from .views import PostDetailView, CommentUpdateView, CommentDeleteView
+from django.urls import path
+from .views import PostSearchView, PostsByTagView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,5 +24,6 @@ urlpatterns = [
     path('post/<int:pk>/', PostDetailView.as_view(), name='post-detail'),
     path('comment/<int:pk>/edit/', CommentUpdateView.as_view(), name='comment-edit'),
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
-    
+    path('tags/<slug:slug>/', PostsByTagView.as_view(), name='posts-by-tag'),
+    path('search/', PostSearchView.as_view(), name='post-search'),
 ]

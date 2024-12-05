@@ -1,0 +1,6 @@
+<h2>Posts tagged "{{ view.kwargs.slug }}"</h2>
+<ul>
+    {% for post in object_list %}
+        <li><a href="{% url 'post-detail' post.pk %}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
