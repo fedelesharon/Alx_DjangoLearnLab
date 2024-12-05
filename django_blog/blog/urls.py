@@ -30,5 +30,5 @@ urlpatterns = [
     path('search/', PostSearchView.as_view(), name='post-search'),
     path("tags/<slug:tag_slug>/", "PostByTagListView.as_view()"),
     path('posts/<int:post_id>/comments/new/', CommentCreateView.as_view(), name='comment-create'),
-    path("comment/<int:pk>/update/", "post/<int:pk>/comments/new/")
+    path("comment/<int:pk>/update/", "post/<int:pk>/comments/new/"),
 ]
