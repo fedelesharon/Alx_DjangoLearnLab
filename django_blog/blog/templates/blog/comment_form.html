@@ -4,3 +4,13 @@
     {{ form.as_p }}
     <button type="submit">Update</button>
 </form>
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <h2>Add a Comment</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit Comment</button>
+    </form>
+{% endblock %}

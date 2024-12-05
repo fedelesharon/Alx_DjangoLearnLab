@@ -22,6 +22,10 @@ from .forms import CommentForm
 from django.db.models import Q
 from django.views.generic import ListView
 from taggit.models import Tag
+from django.views.generic.edit import CreateView
+from django.shortcuts import get_object_or_404, redirect
+from .models import Post, Comment
+from .forms import CommentForm
 
 
 def register(request):
@@ -52,6 +56,22 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'
+
+class CommentCreateView(CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comment_form.html'
+
+    def form_valid(self, form):
+        # Set the post and author of the comment
+        post = get_object_or_404(Post, pk=self.kwargs['post_id'])
+        form.instance.post = post
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirect to the post detail page after submitting a comment
+        return self.object.post.get_absolute_url()    
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
