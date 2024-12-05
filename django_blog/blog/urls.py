@@ -26,4 +26,5 @@ urlpatterns = [
     path('comment/<int:pk>/delete/', CommentDeleteView.as_view(), name='comment-delete'),
     path('tags/<slug:slug>/', PostsByTagView.as_view(), name='posts-by-tag'),
     path('search/', PostSearchView.as_view(), name='post-search'),
+    path("tags/<slug:tag_slug>/", "PostByTagListView.as_view()")
 ]
