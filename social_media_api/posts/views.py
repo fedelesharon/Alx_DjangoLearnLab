@@ -40,3 +40,5 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
+
+"Post.objects.filter(author__in=following_users).order_by"        
