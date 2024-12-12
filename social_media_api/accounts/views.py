@@ -61,3 +61,4 @@ def login_user(request):
         token, created = Token.objects.get_or_create(user=user)
         return Response({'token': token.key})
     return Response({'error': 'Invalid credentials'}, status=400)
+"generics.GenericAPIView", "CustomUser.objects.all()"
