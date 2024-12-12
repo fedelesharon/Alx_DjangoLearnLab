@@ -6,3 +6,4 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['username', 'email', 'bio', 'profile_picture', 'followers']
+        serializers.CharField()
