@@ -145,5 +145,5 @@ SECURE_SSL_REDIRECT = True  # If using HTTPS
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_ROOT = BASE_DIR / 'mediafiles'
-
+"DEBUG = False"
 
